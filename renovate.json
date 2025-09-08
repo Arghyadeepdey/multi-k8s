@@ -6,8 +6,16 @@
   "assignees": [
     "arghyadeep"
   ],
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
+  "prCreation": "immediate",
+  "recreateClosed": true,
+  "rebaseWhen": "conflicted",
+  "platformAutomerge": false,
+  "rangeStrategy": "bump",
   "gomod": {
-    "enabled": true
+    "enabled": true,
+    "minimumReleaseAge": null
   },
   "packageRules": [
     {
@@ -17,7 +25,8 @@
     {
       "matchManagers": ["gomod"],
       "matchDepNames": ["go"],
-      "rangeStrategy": "bump"
+      "rangeStrategy": "bump",
+      "enabled": true
     },
     {
       "matchManagers": ["gomod"],
@@ -28,18 +37,37 @@
       ],
       "enabled": true,
       "rangeStrategy": "bump"
+    },
+    {
+      "matchManagers": ["regex"],
+      "matchPackageNames": [
+        "golang.org/x/net",
+        "golang.org/x/oauth2",
+        "google.golang.org/protobuf"
+      ],
+      "enabled": true,
+      "rangeStrategy": "bump",
+      "semanticCommitType": "build",
+      "semanticCommitScope": "deps"
     }
   ],
   "regexManagers": [
     {
       "fileMatch": ["(^|/)go\\.mod$"],
       "matchStrings": [
-        "(?<depName>golang\\.org\\/x\\/net)\\s+=>\\s+golang\\.org\\/x\\/net\\s+(?<currentValue>v[^\\s]+)",
-        "(?<depName>golang\\.org\\/x\\/oauth2)\\s+=>\\s+golang\\.org\\/x\\/oauth2\\s+(?<currentValue>v[^\\s]+)",
-        "(?<depName>google\\.golang\\.org\\/protobuf)\\s+=>\\s+google\\.golang\\.org\\/protobuf\\s+(?<currentValue>v[^\\s]+)"
+        "\\s*(?<depName>golang\\.org\\/x\\/net)\\s+=>\\s+golang\\.org\\/x\\/net\\s+(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)(?:-[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*)?",
+        "\\s*(?<depName>golang\\.org\\/x\\/oauth2)\\s+=>\\s+golang\\.org\\/x\\/oauth2\\s+(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)(?:-[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*)?",
+        "\\s*(?<depName>google\\.golang\\.org\\/protobuf)\\s+=>\\s+google\\.golang\\.org\\/protobuf\\s+(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)(?:-[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*)?"
       ],
       "datasourceTemplate": "go",
-      "versioningTemplate": "semver"
+      "extractVersionTemplate": "^v(?<version>.*)$",
+      "depNameTemplate": "{{{depName}}}",
+      "currentValueTemplate": "{{{currentValue}}}"
     }
-  ]
+  ],
+  "commitMessageTopic": "{{depName}}",
+  "commitMessageExtra": "to {{{newValue}}}",
+  "commitMessageSuffix": "",
+  "prTitle": "Update {{depName}} to {{{newValue}}}",
+  "prBodyTemplate": "This PR contains the following updates:\n\n| Package | Change | Age | Adoption | Passing | Confidence |\n|---|---|---|---|---|---|\n| {{depName}} | `{{currentValue}}` -> `{{newValue}}` | [![age](https://badges.renovateapi.com/packages/go/{{depName}}/{{newValue}}/age-slim)](https://docs.renovatebot.com/merge-confidence/) | [![adoption](https://badges.renovateapi.com/packages/go/{{depName}}/{{newValue}}/adoption-slim)](https://docs.renovatebot.com/merge-confidence/) | [![passing](https://badges.renovateapi.com/packages/go/{{depName}}/{{newValue}}/compatibility-slim/{{currentValue}})](https://docs.renovatebot.com/merge-confidence/) | [![confidence](https://badges.renovateapi.com/packages/go/{{depName}}/{{newValue}}/confidence-slim/{{currentValue}})](https://docs.renovatebot.com/merge-confidence/) |\n\n---\n\n### Configuration\n\n📅 **Schedule**: Branch creation - At any time (no schedule defined), Automerge - At any time (no schedule defined).\n\n🚦 **Automerge**: Disabled by config. Please merge this manually once you are satisfied.\n\n♻ **Rebasing**: Whenever PR becomes conflicted, or you tick the rebase/retry checkbox.\n\n🔕 **Ignore**: Close this PR and you won't be reminded about this update again.\n\n---\n\n - [ ] If you want to rebase/retry this PR, check this box"
 }
