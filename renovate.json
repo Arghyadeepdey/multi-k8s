@@ -6,6 +6,12 @@
   "assignees": [
     "arghyadeep"
   ],
+  "prHourlyLimit": 20,
+  "prConcurrentLimit": 30,
+  "prCreation": "immediate",
+  "recreateClosed": true,
+  "rebaseWhen": "conflicted",
+  "platformAutomerge": false,
   "gomod": {
     "enabled": true
   },
@@ -17,7 +23,8 @@
     {
       "matchManagers": ["gomod"],
       "matchDepNames": ["go"],
-      "rangeStrategy": "bump"
+      "rangeStrategy": "bump",
+      "enabled": true
     },
     {
       "matchManagers": ["gomod"],
@@ -28,18 +35,22 @@
       ],
       "enabled": true,
       "rangeStrategy": "bump"
+    },
+    {
+      "matchManagers": ["regex"],
+      "enabled": true,
+      "rangeStrategy": "bump"
     }
   ],
   "regexManagers": [
     {
       "fileMatch": ["(^|/)go\\.mod$"],
       "matchStrings": [
-        "(?<depName>golang\\.org\\/x\\/net)\\s+=>\\s+golang\\.org\\/x\\/net\\s+(?<currentValue>v[^\\s]+)",
-        "(?<depName>golang\\.org\\/x\\/oauth2)\\s+=>\\s+golang\\.org\\/x\\/oauth2\\s+(?<currentValue>v[^\\s]+)",
-        "(?<depName>google\\.golang\\.org\\/protobuf)\\s+=>\\s+google\\.golang\\.org\\/protobuf\\s+(?<currentValue>v[^\\s]+)"
+        "(?<depName>golang\\.org/x/net)\\s+=>\\s+golang\\.org/x/net\\s+(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)",
+        "(?<depName>golang\\.org/x/oauth2)\\s+=>\\s+golang\\.org/x/oauth2\\s+(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)",
+        "(?<depName>google\\.golang\\.org/protobuf)\\s+=>\\s+google\\.golang\\.org/protobuf\\s+(?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)"
       ],
-      "datasourceTemplate": "go",
-      "versioningTemplate": "semver"
+      "datasourceTemplate": "go"
     }
   ]
 }
