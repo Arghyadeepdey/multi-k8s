@@ -6,10 +6,11 @@
   "assignees": [
     "arghyadeep"
   ],
-  "go": {
-    "postUpdateOptions": ["gomodUpdateImportPaths", "gomodTidy"]
-  },
   "packageRules": [
+    {
+      "matchManagers": ["gomod"],
+      "postUpdateOptions": ["gomodUpdateImportPaths", "gomodTidy"]
+    },
     {
       "matchManagers": ["gomod"],
       "matchDepNames": ["go"],
