@@ -6,5 +6,16 @@
   "prHeader" : "arghya-testheader",
   "assignees" : [
     "arghyadeep"
+  ],
+  "go": {
+    "postUpdateOptions": ["gomodUpdateImportPaths", "gomodTidy"]
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["gomod"],
+      "matchDepNames": ["go"],
+      "matchDepTypes": ["golang"],
+      "rangeStrategy": "bump"
+    }
   ]
 }
