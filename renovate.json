@@ -15,6 +15,17 @@
       "matchManagers": ["gomod"],
       "matchDepNames": ["go"],
       "rangeStrategy": "bump"
+    },
+    {
+      "matchManagers": ["gomod"],
+      "matchDepNames": [
+        "golang.org/x/net",
+        "golang.org/x/oauth2", 
+        "google.golang.org/protobuf"
+      ],
+      "matchDepTypes": ["replace"],
+      "rangeStrategy": "bump",
+      "enabled": true
     }
   ]
 }
