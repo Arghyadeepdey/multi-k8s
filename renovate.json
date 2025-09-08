@@ -6,6 +6,9 @@
   "assignees": [
     "arghyadeep"
   ],
+  "gomod": {
+    "enabled": true
+  },
   "packageRules": [
     {
       "matchManagers": ["gomod"],
@@ -18,14 +21,25 @@
     },
     {
       "matchManagers": ["gomod"],
-      "matchDepNames": [
+      "matchPackageNames": [
         "golang.org/x/net",
-        "golang.org/x/oauth2", 
+        "golang.org/x/oauth2",
         "google.golang.org/protobuf"
       ],
-      "matchDepTypes": ["replace"],
-      "rangeStrategy": "bump",
-      "enabled": true
+      "enabled": true,
+      "rangeStrategy": "bump"
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["(^|/)go\\.mod$"],
+      "matchStrings": [
+        "(?<depName>golang\\.org\\/x\\/net)\\s+=>\\s+golang\\.org\\/x\\/net\\s+(?<currentValue>v[^\\s]+)",
+        "(?<depName>golang\\.org\\/x\\/oauth2)\\s+=>\\s+golang\\.org\\/x\\/oauth2\\s+(?<currentValue>v[^\\s]+)",
+        "(?<depName>google\\.golang\\.org\\/protobuf)\\s+=>\\s+google\\.golang\\.org\\/protobuf\\s+(?<currentValue>v[^\\s]+)"
+      ],
+      "datasourceTemplate": "go",
+      "versioningTemplate": "semver"
     }
   ]
 }
