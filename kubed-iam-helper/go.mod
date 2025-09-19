@@ -3,5 +3,5 @@ go 1.24
 
 replace (
 golang.org/x/crypto => golang.org/x/crypto v0.31.0
-golang.org/x/oauth2 => golang.org/x/oauth2 v0.27.0
+golang.org/x/oauth2 => golang.org/x/oauth2 v0.31.0
 )
