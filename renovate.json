@@ -40,6 +40,14 @@
       "matchManagers": ["regex"],
       "enabled": true,
       "rangeStrategy": "bump"
+    },
+    {
+      "matchFileNames": ["*/go.mod"],
+      "excludeDepNames": ["go"],
+      "branchName": "platform/thirdparty/{{parentDir}}",
+      "commitMessagePrefix": "feat({{parentDir}}): ",
+      "prTitle": "Update {{parentDir}} dependencies",
+      "groupName": "{{parentDir}}-dependencies"
     }
   ],
   "regexManagers": [
