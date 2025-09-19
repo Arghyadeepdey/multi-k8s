@@ -1,5 +1,5 @@
 module k8s.io/autoscaler/vertical-pod-autoscaler
-go 1.24
+go 1.25.1
 
 replace (
 golang.org/x/crypto => golang.org/x/crypto v0.31.0
