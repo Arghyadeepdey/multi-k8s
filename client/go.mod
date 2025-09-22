@@ -1,5 +1,5 @@
 module k8s.io/autoscaler/vertical-pod-autoscaler
-go 1.24
+go 1.25.1
 replace (
 golang.org/x/net => golang.org/x/net v0.32.0
 golang.org/x/oauth2 => golang.org/x/oauth2 v0.24.0
