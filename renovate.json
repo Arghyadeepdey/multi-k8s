@@ -11,7 +11,8 @@
   "prCreation": "immediate",
   "recreateClosed": true,
   "rebaseWhen": "conflicted",
-  "platformAutomerge": false,
+  "automergeType": "pr",
+  "automerge": true,
   "gomod": {
     "enabled": true
   },
